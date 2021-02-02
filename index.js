@@ -15,13 +15,13 @@ function getXrpData(){
 function displayCurrentPrice(msg){
     getXrpData()
         .then(data=>{
-            console.log(data.data[0]);
+            console.log(Number.parseFloat(data.data[0]['price']).toFixed(4));
             msg.reply(`The current price of XRP is $${Number.parseFloat(data.data[0]['price']).toFixed(4)}`);
         })
         .catch(err=>console.log(err));
 }
 
-function checkPrice(maxToNotify, minToNotify){
+function checkPriceForNotify(maxToNotify, minToNotify){
     const channelId = '805947280725114921'
 
     getXrpData()
@@ -49,7 +49,7 @@ function setNotify(msg, notifyType){
     msg.reply(`What would you like to set the ${notifyType} to?`);
     const checkInput = m => isFinite(m.content);
 
-    const collector = message.channel.createMessageCollector(checkInput, {time: 15000});
+    const collector = msg.channel.createMessageCollector(checkInput, {time: 15000});
 
     collector.on('collect', m => {
         var notifyValue = Number.parseFloat(m.content);
@@ -78,13 +78,12 @@ client.on('message', msg => {
 client.on('message', msg => {
     var maxToNotify = NaN;
     var minToNotify = NaN;
-    
+
     if(msg.content.startsWith('xrp-notify') || msg.content.startsWith(`xrp-n`)){
         maxToNotify = setNotify(msg, 'max');
         minToNotify = setMin(msg, 'min');
+        setInterval((maxToNotify, minToNotify) => checkPriceForNotify(maxToNotify, minToNotify), 30000);
     }
-
-    setInterval((maxToNotify, minToNotify) => checkPrice(maxToNotify, minToNotify), 30000);
 })
 
 client.login(botToken);
