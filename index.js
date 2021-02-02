@@ -35,7 +35,7 @@ function checkPrice(){
             console.log(`Current Price: $${currentPrice}`);
             if(currentPrice > maxPrice){
                 client.channels.cache.get('805947280725114921')
-                .send(`The price of XRP is above $${maxPrice}!!! SELL!!`);
+                .send(`The price of XRP is above $${maxPrice}!!! SELL NOW!`);
             }
             else if(currentPrice < minPrice){
                 client.channels.cache.get('805947280725114921')
