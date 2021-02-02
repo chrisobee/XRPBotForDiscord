@@ -2,7 +2,8 @@
 
 import Discord from "discord.js";
 import axios from 'axios';
-import {coinbaseKey, xrpToken} from "./HiddenFiles/token.js";
+const botToken = process.env.BOT_TOKEN;
+const coinbaseKey = process.env.COINBASE_KEY;
 const client = new Discord.Client();
 
 function displayCurrentPrice(msg){
@@ -57,5 +58,5 @@ client.on('message', msg => {
     }
 });
 
-client.login(xrpToken);
+client.login(botToken);
 setInterval(checkPrice, 30000);
