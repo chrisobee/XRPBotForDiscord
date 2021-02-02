@@ -1,0 +1,17 @@
+{
+  "name": "xrpbot",
+  "version": "1.0.0",
+  "description": "A Discord Bot to update users on XRP Prices",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris O'Brien",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "discord.js": "^12.5.1",
+    "nodemon": "^2.0.7"
+  }
+}
