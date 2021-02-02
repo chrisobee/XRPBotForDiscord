@@ -78,12 +78,13 @@ client.on('message', msg => {
 client.on('message', msg => {
     var maxToNotify = NaN;
     var minToNotify = NaN;
+    
     if(msg.content.startsWith('xrp-notify') || msg.content.startsWith(`xrp-n`)){
         maxToNotify = setNotify(msg, 'max');
         minToNotify = setMin(msg, 'min');
     }
 
-    setInterval(checkPrice(maxToNotify, minToNotify), 30000);
+    setInterval((maxToNotify, minToNotify) => checkPrice(maxToNotify, minToNotify), 30000);
 })
 
 client.login(botToken);
