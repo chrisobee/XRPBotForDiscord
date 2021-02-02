@@ -15,7 +15,7 @@ function displayCurrentPrice(msg){
     getXrpData()
         .then(data=>{
             console.log(data[0]);
-            msg.reply(`The current price of XRP is $${data[0]['price'].toFixed(4)}`);
+            msg.reply(`The current price of XRP is $${data.data[0]['price'].toFixed(4)}`);
         })
         .catch(err=>console.log(err));
 }
@@ -27,7 +27,7 @@ function checkPrice(){
     getXrpData()
         .then(data=>{
             //Displays current price to log
-            const currentPrice = data[0]['price'];
+            const currentPrice = data.data[0]['price'];
             console.log(`Current Price: $${currentPrice}`);
 
             //Checks if the current price is above a certain set level or below a certain set level
