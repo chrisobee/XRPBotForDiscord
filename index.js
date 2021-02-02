@@ -43,14 +43,17 @@ function checkPrice(maxToNotify, minToNotify){
         .catch(err=>console.log(err));
 }
 
-function setNotify(msg, type){
-    msg.reply(`What would you like to set the ${type} to?`);
+function setNotify(msg, notifyType){
+    const channelId = '805947280725114921';
+
+    msg.reply(`What would you like to set the ${notifyType} to?`);
     const checkInput = m => isFinite(m.content);
 
     const collector = message.channel.createMessageCollector(checkInput, {time: 15000});
 
     collector.on('collect', m => {
         var notifyValue = Number.parseFloat(m.content);
+        msg.channel.send(`The ${notifyType} notify has been set to ${notifyValue}`);
         return notifyValue;
     });
 
