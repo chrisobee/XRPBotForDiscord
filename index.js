@@ -24,6 +24,7 @@ function checkPrice(){
     const minPrice = .24;
 
     const URL = 'https://rest.coinapi.io/v1/assets?filter_asset_id=XRP';
+    
         axios.get(URL, {
             headers:{
                 'X-CoinAPI-Key':coinbaseKey
@@ -44,7 +45,7 @@ function checkPrice(){
         .catch(err=>console.log(err));
 }
 
-setInterval(checkPrice, 10000);
+
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -57,3 +58,4 @@ client.on('message', msg => {
 });
 
 client.login(xrpToken);
+setInterval(checkPrice, 30000);
