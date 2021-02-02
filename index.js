@@ -81,7 +81,7 @@ client.on('message', msg => {
 
     if(msg.content.startsWith('xrp-notify') || msg.content.startsWith(`xrp-n`)){
         maxToNotify = setNotify(msg, 'max');
-        minToNotify = setMin(msg, 'min');
+        minToNotify = setNotify(msg, 'min');
         setInterval((maxToNotify, minToNotify) => checkPriceForNotify(maxToNotify, minToNotify), 30000);
     }
 })
