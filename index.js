@@ -43,13 +43,11 @@ function checkPriceForNotify(maxToNotify, minToNotify){
         .catch(err=>console.log(err));
 }
 
-function setNotify(msg, notifyType){
-    const channelId = '805947280725114921';
-
+async function setNotify(msg, notifyType){
     msg.reply(`What would you like to set the ${notifyType} to?`);
     const checkInput = m => isFinite(m.content);
 
-    const collector = msg.channel.createMessageCollector(checkInput, {time: 15000});
+    const collector = new Discord.MessageCollector(msg.channel, checkInput, {time: 15000});
 
     collector.on('collect', m => {
         var notifyValue = Number.parseFloat(m.content);
@@ -76,12 +74,12 @@ client.on('message', msg => {
 });
 
 client.on('message', msg => {
-    var maxToNotify = NaN;
-    var minToNotify = NaN;
+    let maxToNotify = NaN;
+    let minToNotify = NaN;
 
     if(msg.content.startsWith('xrp-notify') || msg.content.startsWith(`xrp-n`)){
-        maxToNotify = setNotify(msg, 'max');
-        minToNotify = setNotify(msg, 'min');
+        maxToNotify = await Promise.resolve(setNotify(msg, 'max'));
+        minToNotify = await Promise.resolve(setNotify(msg, 'min'));
         setInterval((maxToNotify, minToNotify) => checkPriceForNotify(maxToNotify, minToNotify), 30000);
     }
 })
