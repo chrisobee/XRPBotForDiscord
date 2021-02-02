@@ -15,7 +15,7 @@ function displayCurrentPrice(msg){
     getXrpData()
         .then(data=>{
             console.log(data.data[0]);
-            msg.reply(`The current price of XRP is $${data.data[0]['price'].toFixed(4)}`);
+            msg.reply(`The current price of XRP is $${Number.parseFloat(data.data[0]['price']).toFixed(4)}`);
         })
         .catch(err=>console.log(err));
 }
